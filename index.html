@@ -28,6 +28,128 @@
             font-family: var(--font-body);
             overflow: hidden; /* Scroll locked until open */
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23800000' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            cursor: none;
+        }
+
+        html, body, button, a, .btn, .open-btn, .map-link-btn, nav a, #audio-ctrl, img, .gallery-item img {
+            cursor: none !important;
+            -webkit-user-drag: none;
+            user-drag: none;
+            user-select: none;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(212, 175, 55, 0.95);
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.12);
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(1);
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.35), inset 0 0 10px rgba(255, 223, 121, 0.28);
+            z-index: 20000;
+            will-change: transform, width, height, box-shadow;
+            opacity: 0.96;
+            animation: cursor-glow 3.2s ease-in-out infinite;
+        }
+
+        .custom-cursor::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 244, 190, 0.85);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 12px rgba(255, 244, 190, 0.85);
+        }
+
+        .custom-cursor::after {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.35), 0 0 70px rgba(255, 223, 121, 0.14);
+            opacity: 0.55;
+            transition: opacity 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .custom-cursor.hovered {
+            width: 54px;
+            height: 54px;
+            border-color: rgba(255, 223, 121, 1);
+            background: rgba(255, 239, 175, 0.18);
+            transform: translate(-50%, -50%) scale(1.05);
+            box-shadow: 0 0 28px rgba(212, 175, 55, 0.85), inset 0 0 16px rgba(255, 223, 121, 0.55);
+            animation: cursor-glow-hover 1.8s ease-in-out infinite;
+        }
+
+        .custom-cursor.hovered::after {
+            opacity: 0.85;
+            box-shadow: 0 0 48px rgba(255, 223, 121, 0.55), 0 0 80px rgba(212, 175, 55, 0.25);
+        }
+
+        .custom-cursor.clicked {
+            width: 42px;
+            height: 42px;
+            transform: translate(-50%, -50%) scale(0.98);
+            box-shadow: 0 0 16px rgba(212, 175, 55, 0.7), inset 0 0 8px rgba(255, 223, 121, 0.32);
+            background: rgba(255, 239, 175, 0.12);
+        }
+
+        .custom-cursor.clicked::before {
+            transform: translate(-50%, -50%) scale(1.25);
+            box-shadow: 0 0 18px rgba(255, 244, 190, 0.95);
+        }
+
+        .custom-cursor.clicked::after {
+            opacity: 1;
+            box-shadow: 0 0 72px rgba(255, 223, 121, 0.7), 0 0 110px rgba(212, 175, 55, 0.35);
+        }
+
+        .custom-cursor.hovered.clicked {
+            width: 48px;
+            height: 48px;
+            transform: translate(-50%, -50%) scale(1.0);
+        }
+
+        .custom-cursor-ripple {
+            position: fixed;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 223, 121, 0.95);
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.9;
+            z-index: 19999;
+            animation: ripple-pop 0.55s ease-out forwards;
+        }
+
+        @keyframes ripple-pop {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+            100% { transform: translate(-50%, -50%) scale(3.4); opacity: 0; }
+        }
+
+        @keyframes cursor-glow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 20px rgba(212, 175, 55, 0.35), inset 0 0 10px rgba(255, 223, 121, 0.28); }
+            50% { transform: translate(-50%, -50%) scale(1.02); box-shadow: 0 0 28px rgba(212, 175, 55, 0.45), inset 0 0 14px rgba(255, 223, 121, 0.35); }
+        }
+
+        @keyframes cursor-glow-hover {
+            0%, 100% { transform: translate(-50%, -50%) scale(1.04); }
+            50% { transform: translate(-50%, -50%) scale(1.08); }
+        }
+
+        @media (hover: none), (pointer: coarse) {
+            body { cursor: auto; }
+            .custom-cursor { display: none; }
         }
 
       .gold-text {
@@ -348,6 +470,68 @@
             else { mus.play().catch(() => {}); btn.innerHTML = '🎶'; }
             isPlaying =!isPlaying;
         }
+
+        // 4. Animated Glow Cursor
+        const customCursor = document.createElement('div');
+        customCursor.className = 'custom-cursor';
+        document.body.appendChild(customCursor);
+
+        const hoverElements = 'button, .btn, .open-btn, .map-link-btn, nav a, .gallery-item img';
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let cursorX = mouseX;
+        let cursorY = mouseY;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+            customCursor.style.opacity = '0.96';
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.18;
+            cursorY += (mouseY - cursorY) * 0.18;
+            customCursor.style.left = `${cursorX}px`;
+            customCursor.style.top = `${cursorY}px`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.addEventListener('mouseover', (event) => {
+            if (event.target.closest(hoverElements)) {
+                customCursor.classList.add('hovered');
+            } else {
+                customCursor.classList.remove('hovered');
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            customCursor.classList.add('clicked');
+        });
+
+        document.addEventListener('mouseup', () => {
+            customCursor.classList.remove('clicked');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (event.target.closest('.gallery-item img, button, .btn, .open-btn, .map-link-btn, nav a')) {
+                const ripple = document.createElement('div');
+                ripple.className = 'custom-cursor-ripple';
+                ripple.style.left = `${event.clientX}px`;
+                ripple.style.top = `${event.clientY}px`;
+                document.body.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            customCursor.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            customCursor.style.opacity = '0.96';
+        });
     </script>
 </body>
 </html>
